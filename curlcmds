@@ -8,3 +8,6 @@ Update Record
 curl -X PUT -d "error[name]=ReallyHorribleError" http://localhost:4567/ErrorHandler/1
 Delete Record
 curl -X DELETE http://localhost:4567/ErrorHandler/1
+SM Example Input data
+
+curl -d "error[server]=ldxx90depot2.dx.deere.com&error[priority]=3&error[status]=CRITICAL&error[error]=Pulp Sync Error&error[errorlong]=Pulp Sync Error Depot rhel5 since august&error[smgroup]=gs3-UnixLinux" http://localhost:4567/ErrorHandler
