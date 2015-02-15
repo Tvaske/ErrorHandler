@@ -3,6 +3,12 @@ require "bundler"
 require 'sinatra/json'
 
 Bundler.require
+configure do
+  $LOAD_PATH.unshift("#{File.dirname(__FILE__)}/lib")
+  Dir.glob("#{File.dirname(__FILE__)}/lib/*.rb") { |lib| 
+    require File.basename(lib, '.*') 
+  }
+end
 require "error"
 
 DataMapper.setup(:default, 'sqlite::mmemory:')
@@ -21,10 +27,14 @@ get    '/ErrorHandler' do
 end
 
 get    '/ErrorHandler/:id' do
-  content_type :json
+#  content_type :json
+#
+#  errors = Error.get params[:id]
+#  errors.to_json
 
-  errors = Error.get params[:id]
-  errors.to_json
+   Errors = Error.get(params[:id])
+   erb :error
+    
 end
 
 post   '/ErrorHandler' do
